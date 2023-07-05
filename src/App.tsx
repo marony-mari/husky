@@ -10,6 +10,7 @@ function App() {
     // axios に Cookie を送受信させたいときは withCredentials=true を設定する
     axios.defaults.withCredentials = true
     // getCsrfToken 関数の定義
+    // useEffect で非同期処理は使えないので一度変数に格納している
     const getCsrfToken = async () => {
       // process.env. で .env ファイルの内容を参照する
       const { csrf_token } = await axios
