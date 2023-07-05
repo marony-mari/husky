@@ -13,7 +13,7 @@ export const Todo = () => {
   const editedTask = useStore((state) => state.editedTask)
   const updateEditedTask = useStore((state) => state.updateEditedTask)
 
-  // hooks はコンポーネント直下で呼び出す！！！！！！！！！！！！他で呼んじゃダメ！！！！！！！！！！
+  // hooks はコンポーネント直下で呼び出す！！！！！！！！！！！！他で呼んじゃダメ！！！
   const { signOutMutation } = useMutateAuth()
   const { createTaskMutation, updateTaskMutation } = useMutateTask()
   const queryClient = useQueryClient()
