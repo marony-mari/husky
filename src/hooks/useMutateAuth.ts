@@ -5,7 +5,6 @@ import { useError } from './useError'
 import useStore from '../store'
 import { Credential } from '../types'
 
-// Mutate ・・・データを更新すること
 export const useMutateAuth = () => {
   const navigate = useNavigate()
   const { switchErrorHandling } = useError()
@@ -69,6 +68,5 @@ export const useMutateAuth = () => {
     }
   )
 
-  // key と value が等しい時はわざわざ全部書かなくて良い
   return { signInMutation, signUpMutation, signOutMutation }
 }

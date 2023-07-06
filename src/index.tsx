@@ -6,15 +6,14 @@ import reportWebVitals from './reportWebVitals'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const quwryClient = new QueryClient({})
-
-// React18 からの書き方
-// ブラウザ DOM ノード内に React コンポーネントを表示するための root を作成
+// React コンポーネントを表示するための root を作成
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+const queryClient = new QueryClient({})
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={quwryClient}>
+    <QueryClientProvider client={queryClient}>
       <App />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

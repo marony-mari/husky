@@ -2,7 +2,7 @@ import {
   ArrowRightOnRectangleIcon,
   ShieldCheckIcon
 } from '@heroicons/react/24/solid'
-import { useStore } from '../store'
+import useStore from '../store'
 import { TaskItem } from './TaskItem'
 import { useMutateAuth } from '../hooks/useMutateAuth'
 import { useQueryClient } from '@tanstack/react-query'
@@ -13,14 +13,13 @@ export const Todo = () => {
   const editedTask = useStore((state) => state.editedTask)
   const updateEditedTask = useStore((state) => state.updateEditedTask)
 
-  // hooks はコンポーネント直下で呼び出す！！！！！！！！！！！！他で呼んじゃダメ！！！
+  // hooks はコンポーネント直下で呼び出す
   const { signOutMutation } = useMutateAuth()
   const { createTaskMutation, updateTaskMutation } = useMutateTask()
   const queryClient = useQueryClient()
   const { data, isLoading } = useQueryTasks()
 
   const signOut = async () => {
-    // then で繋ぐ必要はなし 取得した値を使ってなにかするわけじゃ無いから
     await signOutMutation.mutateAsync()
     queryClient.removeQueries(['tasks'])
   }

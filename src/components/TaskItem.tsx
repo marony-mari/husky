@@ -2,7 +2,7 @@ import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { FC } from 'react'
 import { TaskItemProps } from '../types'
 import { useMutateTask } from '../hooks/useMutateTask'
-import { useStore } from '../store'
+import useStore from '../store'
 
 export const TaskItem: FC<TaskItemProps> = ({ id, title }) => {
   const updateEditedTask = useStore((state) => state.updateEditedTask)

@@ -10,8 +10,7 @@ type State = {
   resetEditedTask: () => void
 }
 
-// store ・・・格納する場所という意味で使われる
-export const useStore = create<State>((set) => ({
+const useStore = create<State>((set) => ({
   editedTask: { id: 0, title: '' },
   updateEditedTask: (payload) =>
     set({
@@ -20,5 +19,4 @@ export const useStore = create<State>((set) => ({
   resetEditedTask: () => set({ editedTask: { id: 0, title: '' } })
 }))
 
-// 優先的に export される
 export default useStore

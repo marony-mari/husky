@@ -6,8 +6,6 @@ export const useError = () => {
   const navigate = useNavigate()
   const resetEditedTask = useStore((state) => state.resetEditedTask)
   const getCsrfToken = async () => {
-    // res の値をイメージしながら書く
-    //　{} で宣言したらオブジェクトで返却する
     const { csrf_token } = await axios
       .get(`${process.env.REACT_APP_MALAMUTE_URL}/csrf`)
       .then((res) => res.data)
@@ -22,7 +20,6 @@ export const useError = () => {
         //　CSRFトークンを取得し直したからうまくいくかも
         alert('CSRF token is invalid, please try again')
         break
-      //　jwt・・・アクセストークン
       //　期限切れ
       case 'invalid or expired jwt':
         //　もう一度ログインし直して

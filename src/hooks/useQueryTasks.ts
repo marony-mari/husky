@@ -7,8 +7,6 @@ export const useQueryTasks = () => {
   const { switchErrorHandling } = useError()
 
   const getTasks = async () => {
-    // ディストラクチャリング ※めっっっっちゃ使う！！！！！
-    // 関数の型宣言の仕方！！！！！！！！覚えろ！！！！！！！！！！！！！！！！！！！！！！
     const { data }: { data: Tasks } = await axios.get(
       `${process.env.REACT_APP_MALAMUTE_URL}/tasks`
     )
@@ -16,7 +14,7 @@ export const useQueryTasks = () => {
   }
 
   // フロントエンドでキャッシュを持つことができる
-  // 最初の1回だけ実行してあとは React Query　のキャッシュに保管する
+  // https://tanstack.com/query/v4/docs/react/reference/useQuery
   return useQuery({
     queryKey: ['tasks'], // キャッシュの key
     queryFn: getTasks,
