@@ -1,10 +1,11 @@
-import { CheckBadgeIcon, ArrowPathIcon } from '@heroicons/react/24/solid'
+import { CheckBadgeIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 import { useMutateAuth } from '../hooks/useMutateAuth'
 
 export const Auth = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setconfirmPassword] = useState('')
   const [isSigninMode, setIsSigninMode] = useState(true)
 
   const { signInMutation, signUpMutation } = useMutateAuth()
@@ -28,7 +29,9 @@ export const Auth = () => {
         <CheckBadgeIcon className='h-8 w-8 text-blue-500' />
         <span className='text-3xl font-extrabold'>Todo List React App</span>
       </h1>
-      <div>{isSigninMode ? 'Sign in' : 'Sign up'}</div>
+      <div className='text-xl'>
+        {isSigninMode ? 'ログイン' : 'アカウント作成'}
+      </div>
       <form
         className='flex flex-col items-center gap-3'
         onSubmit={handleSubmit}
@@ -36,7 +39,7 @@ export const Auth = () => {
         <input
           type='email'
           className='border border-gray-300 py-2 px-3 text-sm'
-          placeholder='email address'
+          placeholder='メールアドレス'
           value={email}
           name='email'
           autoFocus // このページを開いた時にデフォルトでフォーカスが当たる
@@ -45,24 +48,41 @@ export const Auth = () => {
         <input
           type='password'
           className='border border-gray-300 py-2 px-3 text-sm'
-          placeholder='password'
+          placeholder='パスワード'
           value={password}
           name='password'
           onChange={(e) => setPassword(e.target.value)}
         />
+        {!isSigninMode && (
+          <input
+            type='password'
+            className='border border-gray-300 py-2 px-3 text-sm'
+            placeholder='確認用パスワード'
+            value={confirmPassword}
+            name='confirmPassword'
+            onChange={(e) => setconfirmPassword(e.target.value)}
+          />
+        )}
+
         <button
           className='py-2 px-4 rounded text-white bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500'
-          disabled={!email || !password}
+          disabled={
+            isSigninMode
+              ? !email || !password
+              : !email || !password || !confirmPassword
+          }
           type='submit'
         >
-          {isSigninMode ? 'Sign in' : 'Sign up'}
+          {isSigninMode ? 'ログイン' : '新規登録'}
         </button>
       </form>
       <button
-        className='w-6 h-6 text-blue-500'
+        className='w-80 h-6 text-blue-500 text-xs underline'
         onClick={() => setIsSigninMode(!isSigninMode)}
       >
-        <ArrowPathIcon />
+        {isSigninMode
+          ? 'まだアカウントをお持ちでない方はこちら'
+          : 'ログイン画面はこちら'}
       </button>
     </div>
   )
