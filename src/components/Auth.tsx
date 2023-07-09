@@ -5,7 +5,6 @@ import { useMutateAuth } from '../hooks/useMutateAuth'
 export const Auth = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setconfirmPassword] = useState('')
   const [isSigninMode, setIsSigninMode] = useState(true)
 
   const { signInMutation, signUpMutation } = useMutateAuth()
@@ -17,9 +16,7 @@ export const Auth = () => {
     } else {
       await signUpMutation
         .mutateAsync({ email: email, password: password })
-        .then(() => {
-          signInMutation.mutate({ email: email, password: password })
-        })
+        .then(() => signInMutation.mutate({ email: email, password: password }))
     }
   }
 
@@ -53,24 +50,9 @@ export const Auth = () => {
           name='password'
           onChange={(e) => setPassword(e.target.value)}
         />
-        {!isSigninMode && (
-          <input
-            type='password'
-            className='border border-gray-300 py-2 px-3 text-sm'
-            placeholder='確認用パスワード'
-            value={confirmPassword}
-            name='confirmPassword'
-            onChange={(e) => setconfirmPassword(e.target.value)}
-          />
-        )}
-
         <button
           className='py-2 px-4 rounded text-white bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500'
-          disabled={
-            isSigninMode
-              ? !email || !password
-              : !email || !password || !confirmPassword
-          }
+          disabled={!email || !password}
           type='submit'
         >
           {isSigninMode ? 'ログイン' : '新規登録'}
