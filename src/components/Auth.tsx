@@ -46,6 +46,8 @@ export const Auth = () => {
           type='password'
           className='border border-gray-300 py-2 px-3 text-sm'
           placeholder='パスワード'
+          minLength={6}
+          maxLength={30}
           value={password}
           name='password'
           onChange={(e) => setPassword(e.target.value)}

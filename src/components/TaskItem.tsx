@@ -9,8 +9,8 @@ export const TaskItem: FC<TaskItemProps> = ({ id, title }) => {
   const { deleteTaskMutation } = useMutateTask()
 
   return (
-    <li className='flex'>
-      <div className='font-bold mr-5'>{title}</div>
+    <li className='flex items-center'>
+      <div className='font-bold w-40 mr-5'>{title}</div>
       <button
         className='h-5 w-5 mr-2'
         onClick={() => updateEditedTask({ id, title })}
